@@ -16,3 +16,9 @@
 .Toolbar nav {
    height: 100%;
 }
+
+@media (max-width: 499) {
+   .DesktopOnly {
+      display: none;
+   }
+}
