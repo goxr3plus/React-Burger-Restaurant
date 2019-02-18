@@ -69,7 +69,7 @@ class BurgerBuilder extends Component {
    }
 
    continuePurchaseHandler = () => {
-      alert("You continue bitch!")
+      alert("You purchased bitch!")
    }
 
    render() {
