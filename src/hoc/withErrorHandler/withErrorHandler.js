@@ -1,19 +1,19 @@
 import React, { Component } from "react"
 import Modal from "./../../components/UI/Modal/Modal"
 
-const withErrorHandler = (WrappedComponent, axionInstance) => {
+const withErrorHandler = (WrappedComponent, axiosInstance) => {
    return class extends Component {
       state = {
          error: null,
       }
 
-      componentDidMount() {
-         axionInstance.interceptors.request.use(req => {
+      componentWillMount() {
+         axiosInstance.interceptors.request.use(req => {
             this.setState({ error: null })
             return req
          })
 
-         axionInstance.interceptors.response.use(
+         axiosInstance.interceptors.response.use(
             res => res,
             error => {
                this.setState({ error: error })

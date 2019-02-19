@@ -25,14 +25,14 @@ class BurgerBuilder extends Component {
    }
 
    componentWillMount(props) {
-      this.setState({
-         ingredients: {
-            salad: 1,
-            bacon: 1,
-            cheese: 1,
-            meat: 1,
-         },
-      })
+      // this.setState({
+      //    ingredients: {
+      //       salad: 1,
+      //       bacon: 1,
+      //       cheese: 1,
+      //       meat: 1,
+      //    },
+      // })
       axiosInstance
          .get("ingredients.json")
          .then(response => {
