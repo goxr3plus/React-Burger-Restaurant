@@ -1,12 +1,10 @@
 ## React-Burger-Restaurant
-Under heavy development
-
-[Try it](https://goxr3plus.github.io/React-Burger-Restaurant/)
+Under heavy development [Try it](https://goxr3plus.github.io/React-Burger-Restaurant/)
 
 ## Features
 - **App**
-  - Connect to realtime [Firebase database](https://react-my-burger-c7029.firebaseio.com/)
-  - Use [Axios.js](https://github.com/axios/axios)
+  - Connecting to realtime [Firebase database](https://react-my-burger-c7029.firebaseio.com/) mobile and web application development platform 
+  - Using [Axios.js](https://github.com/axios/axios) Promise based HTTP client for the browser and node.js
 
 >npm install
 >npm start
