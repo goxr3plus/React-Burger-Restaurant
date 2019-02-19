@@ -17,5 +17,5 @@ Under heavy development
 
 | 3 | 4
 |:-:|:-:|
-| ![First](https://user-images.githubusercontent.com/20374208/52959417-cdac9600-339e-11e9-8b4e-e6c6277e4745.gif) | ![Sec](https://user-images.githubusercontent.com/20374208/52959417-cdac9600-339e-11e9-8b4e-e6c6277e4745.gif) |
+| ![First](https://user-images.githubusercontent.com/20374208/52959417-cdac9600-339e-11e9-8b4e-e6c6277e4745.gif) | ![Sec](https://user-images.githubusercontent.com/20374208/53018739-d31be600-345b-11e9-8eb0-baee862db877.gif) |
 
