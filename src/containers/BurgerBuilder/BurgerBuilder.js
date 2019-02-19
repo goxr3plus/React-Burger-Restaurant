@@ -3,6 +3,7 @@ import Burger from "./../../components/Burger/Burger"
 import BuildControls from "./../../components/Burger/BuildControls/BuildControls"
 import Modal from "./../../components/UI/Modal/Modal"
 import OrderSummary from "../../components/Burger/OrderSummary/OrderSummary"
+import instance from "../../axios-orders"
 
 const INGREDIENT_PRICES = {
    salad: 0.5,
@@ -69,7 +70,27 @@ class BurgerBuilder extends Component {
    }
 
    continuePurchaseHandler = () => {
-      alert("You purchased bitch!")
+      const order = {
+         ingredients: this.state.ingredients,
+         price: this.state.totalPrice,
+         customer: {
+            name: "Max",
+            address: {
+               address: "Testreet 1",
+               zipCode: "324324",
+               country: "Germany",
+            },
+            email: "goxr3plus@gmail.com",
+         },
+         deliveryMethod: "fastest",
+      }
+
+      //Firebase specific
+      instance
+         .post("/orders.json", order)
+         .then(response => console.log(response))
+         .catch(error => console.log(error))
+      // alert("You purchased bitch!")
    }
 
    render() {
@@ -82,7 +103,12 @@ class BurgerBuilder extends Component {
       return (
          <>
             <Modal show={this.state.purchasing} cancelPurchaseHandler={this.cancelPurchaseHandler}>
-               <OrderSummary totalPrice={this.state.totalPrice.toFixed(2)} ingredients={this.state.ingredients} cancelPurchaseHandler={this.cancelPurchaseHandler} continuePurchaseHandler={this.continuePurchaseHandler}/>
+               <OrderSummary
+                  totalPrice={this.state.totalPrice.toFixed(2)}
+                  ingredients={this.state.ingredients}
+                  cancelPurchaseHandler={this.cancelPurchaseHandler}
+                  continuePurchaseHandler={this.continuePurchaseHandler}
+               />
             </Modal>
             <Burger ingredients={this.state.ingredients} />
             <BuildControls

@@ -1,8 +1,7 @@
-import React from "react"
-import "./Layout.css"
-import Toolbar from "../../components/Navigation/Toolbar/Toolbar"
-import SideDrawer from "../../components/Navigation/SideDrawer/SideDrawer"
-import { Component } from "react"
+import React, { Component } from "react";
+import SideDrawer from "../../components/Navigation/SideDrawer/SideDrawer";
+import Toolbar from "../../components/Navigation/Toolbar/Toolbar";
+import "./Layout.css";
 
 class Layout extends Component {
    state = {
