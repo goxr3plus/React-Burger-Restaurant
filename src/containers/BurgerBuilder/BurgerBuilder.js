@@ -7,6 +7,8 @@ import Modal from "./../../components/UI/Modal/Modal"
 import Spinner from "./../../components/UI/Spinner/Spinner"
 import withErrorHandler from "./../../hoc/withErrorHandler/withErrorHandler"
 
+import qs from "qs"
+
 const INGREDIENT_PRICES = {
    salad: 0.5,
    cheese: 0.4,
@@ -50,28 +52,30 @@ class BurgerBuilder extends Component {
       this.setState({ purchasable: !this.isBurgerEmpty(ingredients) })
    }
 
-   addIngredientHandler = ingredient => {
+   addIngredientHandler = ingredientType => {
       const updatedIngredients = this.state.ingredients
-      updatedIngredients.push(ingredient)
+      updatedIngredients.push(ingredientType)
 
       /* Calculate the New Price */
-      const newPrice = this.state.totalPrice + INGREDIENT_PRICES[ingredient]
+      const newPrice = this.state.totalPrice + INGREDIENT_PRICES[ingredientType]
       this.setState({ totalPrice: newPrice, ingredients: updatedIngredients })
       this.updatePurchaseState(updatedIngredients)
    }
 
-   removeIngredientHandler = ingredient => {
-      if (this.state.ingredients[ingredient] === 0) return
-
+   removeIngredientHandler = ingredientType => {
       const updatedIngredients = this.state.ingredients
+      let lastIndex = updatedIngredients.lastIndexOf(ingredientType)
 
-      let lastIndex = updatedIngredients.lastIndexOf(ingredient)
-      lastIndex === -1 ? Date() : updatedIngredients.splice(lastIndex, 1)
+      // Enter if there are ingredients of this type
+      if (lastIndex !== -1) {
+         // Remove the last ingredient matching this type
+         updatedIngredients.splice(lastIndex, 1)
 
-      /* Calculate the New Price */
-      const newPrice = this.state.totalPrice - INGREDIENT_PRICES[ingredient]
-      this.setState({ totalPrice: newPrice, ingredients: updatedIngredients })
-      this.updatePurchaseState(updatedIngredients)
+         /* Calculate the New Price */
+         const newPrice = this.state.totalPrice - INGREDIENT_PRICES[ingredientType]
+         this.setState({ totalPrice: newPrice, ingredients: updatedIngredients })
+         this.updatePurchaseState(updatedIngredients)
+      }
    }
 
    purchaseHandler = () => {
@@ -105,15 +109,16 @@ class BurgerBuilder extends Component {
       //    .then(response => this.setState({ loading: false, purchasing: false }))
       //    .catch(error => this.setState({ loading: false, purchasing: false }))
 
-      
-      const queryParams = []
-      for (let i in this.state.ingredients) {
-         queryParams.push(encodeURIComponent(i) + "=" + encodeURIComponent(this.state.ingredients[i]))
-      }
+      //const queryParams = []
+      const queryParams = qs.stringify(this.state.ingredients);
+      //queryParams.push(encodeURIComponent("ingedients") + "=" + encodeURIComponent(this.state.ingredients))
+      // for (let i in this.state.ingredients) {
+      //    queryParams.push(encodeURIComponent(i) + "=" + encodeURIComponent(this.state.ingredients[i]))
+      // }
 
       this.props.history.push({
          pathname: "/checkout",
-         search: "?" + queryParams.join("&"),
+         search: "?" + queryParams, //.join("&"),
       })
    }
 
