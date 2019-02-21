@@ -1,5 +1,7 @@
 ## React-Burger-Restaurant
 Under heavy development [Try it](https://goxr3plus.github.io/React-Burger-Restaurant/)
+>Done under the mentoring of @padelis... [check this guy](https://github.com/padelis)
+
 
 ## Features
 - **App**
