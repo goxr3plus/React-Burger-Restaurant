@@ -27,17 +27,30 @@ class BurgerBuilder extends Component {
    componentWillMount(props) {
       // this.setState({
       //    ingredients: {
-      //       salad: 1,
+      //       salad: {count: 1},
       //       bacon: 1,
       //       cheese: 1,
       //       meat: 1,
       //    },
       // })
+
+      // this.setState({
+      //    ingredients: {[
+      //       "salad",
+      //       "bacon",
+      //       "cheese",
+      //       "meat"
+      //    ]},
+      // })
+
       axiosInstance
          .get("ingredients.json")
          .then(response => {
             console.log(this.state.ingredients)
-            this.setState({ ingredients: response.data, purchasable: !this.isBurgerEmpty(response.data) })
+            this.setState({
+               ingredients: ["salad", "bacon", "cheese", "meat"],
+               purchasable: !this.isBurgerEmpty(response.data),
+            })
          })
          .catch(error => {
             this.setState({ error: true })
@@ -61,25 +74,31 @@ class BurgerBuilder extends Component {
       this.setState({ purchasable: !this.isBurgerEmpty(ingredients) })
    }
 
-   addIngredientHandler = type => {
-      const updatedCount = this.state.ingredients[type] + 1
-      const updatedIngredients = { ...this.state.ingredients }
-      updatedIngredients[type] = updatedCount
+   addIngredientHandler = ingredient => {
+      const updatedIngredients = this.state.ingredients
+      updatedIngredients.push(ingredient)
 
       /* Calculate the New Price */
-      const newPrice = this.state.totalPrice + INGREDIENT_PRICES[type]
+      const newPrice = this.state.totalPrice + 0.2
       this.setState({ totalPrice: newPrice, ingredients: updatedIngredients })
       this.updatePurchaseState(updatedIngredients)
    }
 
-   removeIngredientHandler = type => {
-      if (this.state.ingredients[type] === 0) return
-      const updatedCount = this.state.ingredients[type] - 1
-      const updatedIngredients = { ...this.state.ingredients }
-      updatedIngredients[type] = updatedCount
+   removeIngredientHandler = ingredient => {
+      if (this.state.ingredients[ingredient] === 0) return
+
+      const updatedIngredients = this.state.ingredients
+
+      let lastIndex = updatedIngredients.lastIndexOf(ingredient)
+      lastIndex == -1 ? Date() : updatedIngredients.splice(lastIndex, 1)
+      //updatedIngredients.splice(lastIndex,1)
+
+      //const updatedCount = this.state.ingredients[type] - 1
+      //const updatedIngredients = { ...this.state.ingredients }
+      //updatedIngredients[type] = updatedCount
 
       /* Calculate the New Price */
-      const newPrice = this.state.totalPrice - INGREDIENT_PRICES[type]
+      const newPrice = this.state.totalPrice - 0.2
       this.setState({ totalPrice: newPrice, ingredients: updatedIngredients })
       this.updatePurchaseState(updatedIngredients)
    }

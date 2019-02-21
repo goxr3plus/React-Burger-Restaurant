@@ -18,7 +18,7 @@ class Checkout extends Component {
          // ['salad','1']
          ingredients[param[0]] = +param[1]
       }
-      this.setState({ ingredients: ingredients })
+       this.setState({ ingredients: ingredients })
    }
 
    checkoutCancelledHandler = () => {
@@ -30,7 +30,7 @@ class Checkout extends Component {
    }
 
    render() {
-      console.log("ZZ " + this.props + "l;ll")
+      console.log("[Checkout.js] " + this.props)
       return (
          <div>
             <div>

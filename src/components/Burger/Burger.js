@@ -5,17 +5,12 @@ import { withRouter } from "react-router-dom"
 
 const burger = props => {
    console.log(props)
-   let transformedIngredients = Object.keys(props.ingredients)
-      .map(igKey => {
-         // console.log("Ig Key :" + igKey)
-         return [...Array(props.ingredients[igKey])].map((_, i) => {
-            // console.log("Ig Key +i :" + igKey + i)
-            return <BurgerIngredient key={igKey + i} type={igKey} />
-         })
+   let transformedIngredients = props.ingredients
+      .map((igKey,i) => {
+          console.log("Ig Key :" + igKey)
+          return <BurgerIngredient key={igKey + i} type={igKey} />
       })
-      .reduce((arr, el) => {
-         return arr.concat(el)
-      })
+    
    if (transformedIngredients.length === 0) transformedIngredients = <p>Please start adding ingredients!</p>
    return (
       <div className={"Burger"}>
