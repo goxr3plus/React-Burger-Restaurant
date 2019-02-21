@@ -37,7 +37,7 @@ class BurgerBuilder extends Component {
          .get("ingredients.json")
          .then(response => {
             console.log(this.state.ingredients)
-            this.setState({ ingredients: response.data })
+            this.setState({ ingredients: response.data, purchasable: !this.isBurgerEmpty(response.data) })
          })
          .catch(error => {
             this.setState({ error: true })
@@ -45,7 +45,7 @@ class BurgerBuilder extends Component {
          })
    }
 
-   updatePurchaseState = ingredients => {
+   isBurgerEmpty = ingredients => {
       const sum = Object.keys(ingredients)
          .map(igKey => {
             return ingredients[igKey]
@@ -54,8 +54,11 @@ class BurgerBuilder extends Component {
             return sum + el
          }, 0)
 
-      this.setState({ purchasable: sum > 0 })
-      console.log(sum)
+      return sum === 0
+   }
+
+   updatePurchaseState = ingredients => {
+      this.setState({ purchasable: !this.isBurgerEmpty(ingredients) })
    }
 
    addIngredientHandler = type => {
