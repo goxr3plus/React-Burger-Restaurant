@@ -16,7 +16,7 @@ const INGREDIENT_PRICES = {
 
 class BurgerBuilder extends Component {
    state = {
-      ingredients: null,
+      ingredients: [],
       totalPrice: 4,
       purchasable: false,
       purchasing: false,
@@ -25,28 +25,11 @@ class BurgerBuilder extends Component {
    }
 
    componentWillMount(props) {
-      // this.setState({
-      //    ingredients: {
-      //       salad: {count: 1},
-      //       bacon: 1,
-      //       cheese: 1,
-      //       meat: 1,
-      //    },
-      // })
-
-      // this.setState({
-      //    ingredients: {[
-      //       "salad",
-      //       "bacon",
-      //       "cheese",
-      //       "meat"
-      //    ]},
-      // })
-
+      // ingredients: ["salad", "bacon", "cheese", "meat"]
       axiosInstance
          .get("ingredients.json")
          .then(response => {
-            console.log(this.state.ingredients)
+            // console.log(this.state.ingredients)
             this.setState({
                ingredients: ["salad", "bacon", "cheese", "meat"],
                purchasable: !this.isBurgerEmpty(response.data),
@@ -54,20 +37,13 @@ class BurgerBuilder extends Component {
          })
          .catch(error => {
             this.setState({ error: true })
-            console.log(error)
+            // console.log(error)
          })
    }
 
    isBurgerEmpty = ingredients => {
-      const sum = Object.keys(ingredients)
-         .map(igKey => {
-            return ingredients[igKey]
-         })
-         .reduce((sum, el) => {
-            return sum + el
-         }, 0)
-
-      return sum === 0
+      // console.log("Ingredients Length :",ingredients.length)
+      return ingredients.length === 0
    }
 
    updatePurchaseState = ingredients => {

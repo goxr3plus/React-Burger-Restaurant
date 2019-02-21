@@ -30,7 +30,7 @@ class Checkout extends Component {
    }
 
    render() {
-      console.log("[Checkout.js] " + this.props)
+      // console.log("[Checkout.js] " + this.props)
       return (
          <div>
             <div>
