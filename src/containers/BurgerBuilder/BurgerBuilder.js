@@ -55,7 +55,7 @@ class BurgerBuilder extends Component {
       updatedIngredients.push(ingredient)
 
       /* Calculate the New Price */
-      const newPrice = this.state.totalPrice + 0.2
+      const newPrice = this.state.totalPrice + INGREDIENT_PRICES[ingredient]
       this.setState({ totalPrice: newPrice, ingredients: updatedIngredients })
       this.updatePurchaseState(updatedIngredients)
    }
@@ -66,15 +66,10 @@ class BurgerBuilder extends Component {
       const updatedIngredients = this.state.ingredients
 
       let lastIndex = updatedIngredients.lastIndexOf(ingredient)
-      lastIndex == -1 ? Date() : updatedIngredients.splice(lastIndex, 1)
-      //updatedIngredients.splice(lastIndex,1)
-
-      //const updatedCount = this.state.ingredients[type] - 1
-      //const updatedIngredients = { ...this.state.ingredients }
-      //updatedIngredients[type] = updatedCount
+      lastIndex === -1 ? Date() : updatedIngredients.splice(lastIndex, 1)
 
       /* Calculate the New Price */
-      const newPrice = this.state.totalPrice - 0.2
+      const newPrice = this.state.totalPrice - INGREDIENT_PRICES[ingredient]
       this.setState({ totalPrice: newPrice, ingredients: updatedIngredients })
       this.updatePurchaseState(updatedIngredients)
    }
@@ -110,6 +105,7 @@ class BurgerBuilder extends Component {
       //    .then(response => this.setState({ loading: false, purchasing: false }))
       //    .catch(error => this.setState({ loading: false, purchasing: false }))
 
+      
       const queryParams = []
       for (let i in this.state.ingredients) {
          queryParams.push(encodeURIComponent(i) + "=" + encodeURIComponent(this.state.ingredients[i]))
