@@ -1,6 +1,10 @@
-import React from "react";
-import "./Spinner.css";
+import React from "react"
+import "./Spinner.css"
 
-const Spinner = props => <div className="Loader">Loading...</div>
+const Spinner = props => (
+   <div style={{ textAlign: "center" }}>
+      <div className="Loader" />
+   </div>
+)
 
 export default Spinner
