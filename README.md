@@ -11,6 +11,9 @@ Under heavy development [Try it](https://goxr3plus.github.io/React-Burger-Restau
 >npm install
 >npm start
 
+![2019-02-22_12-27-43](https://user-images.githubusercontent.com/20374208/53236567-48c2c480-369d-11e9-887d-e456b8999385.gif)
+
+
 | 1 | 2
 |:-:|:-:|
 | ![First](https://user-images.githubusercontent.com/20374208/52959414-cd13ff80-339e-11e9-86fd-efe02b438709.png) | ![Sec](https://user-images.githubusercontent.com/20374208/52959415-cdac9600-339e-11e9-990e-b85cd3bf10d7.png) |
