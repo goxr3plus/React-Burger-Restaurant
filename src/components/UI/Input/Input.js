@@ -5,29 +5,19 @@ const Input = props => {
    let inputElement = null
    let inputClasses = ["InputElement"]
 
-   if (props.invalid && props.shouldValidate) inputClasses.push("Invalid")
+   if (props.invalid && props.shouldValidate && props.touched) inputClasses.push("Invalid")
 
    inputClasses = inputClasses.join(" ")
 
    switch (props.elementType) {
       case "input":
          inputElement = (
-            <input
-               className={inputClasses}
-               {...props.elementConfig}
-               value={props.value}
-               onChange={props.changed}
-            />
+            <input className={inputClasses} {...props.elementConfig} value={props.value} onChange={props.changed} />
          )
          break
       case "textarea":
          inputElement = (
-            <textarea
-               className={inputClasses}
-               {...props.elementConfig}
-               value={props.value}
-               onChange={props.changed}
-            />
+            <textarea className={inputClasses} {...props.elementConfig} value={props.value} onChange={props.changed} />
          )
          break
       case "select":
@@ -44,10 +34,17 @@ const Input = props => {
       default:
          inputElement = null
    }
+
+   let validationError = null
+   if (props.invalid && props.touched) {
+      validationError = <p className={"ValidationError"}><strong>B R O</strong> , focus...</p>;
+   }
+
    return (
       <div className={"Input"}>
          <label>{props.label}</label>
          {inputElement}
+         {validationError}
       </div>
    )
 }
