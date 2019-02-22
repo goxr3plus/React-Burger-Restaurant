@@ -78,6 +78,14 @@ class ContactData extends Component {
          .catch(error => this.setState({ loading: false }))
    }
 
+   inputChangedHandler = (event, identifier) => {
+      const updatedOrderForm = { ...this.state.orderForm }
+      const updatedFormElement = { ...updatedOrderForm[identifier] }
+      updatedFormElement.value = event.target.value
+      updatedOrderForm[identifier] = updatedFormElement
+      this.setState({ orderForm: updatedOrderForm })
+   }
+
    render() {
       const forElementsArray = []
       for (let key in this.state.orderForm) {
@@ -86,7 +94,6 @@ class ContactData extends Component {
             config: this.state.orderForm[key],
          })
       }
-      console.log(forElementsArray)
 
       let form = this.state.loading ? (
          <Spinner />
@@ -99,6 +106,7 @@ class ContactData extends Component {
                   elementType={formElement.config.elementType}
                   elementConfig={formElement.config.elementConfig}
                   value={formElement.config.value}
+                  changed={event => this.inputChangedHandler(event, formElement.id)}
                />
             ))}
             <Button btnType="Success" clicked={this.orderHandler}>
