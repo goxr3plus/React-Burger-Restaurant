@@ -4,7 +4,6 @@ import axiosInstance from "./../../../axios-orders"
 import Input from "./../../../components/UI/Input/Input"
 import Spinner from "./../../../components/UI/Spinner/Spinner"
 import "./ContactData.css"
-import { runInContext } from "vm"
 
 class ContactData extends Component {
    state = {
@@ -77,10 +76,6 @@ class ContactData extends Component {
                options: [{ value: "faster", displayValue: "Fastest" }, { value: "cheapest", displayValue: "Cheapest" }],
             },
             value: "",
-            validation: {
-               required: true,
-            },
-            valid: true,
          },
       },
       loading: false,
@@ -158,7 +153,9 @@ class ContactData extends Component {
                   key={formElement.id}
                   elementType={formElement.config.elementType}
                   elementConfig={formElement.config.elementConfig}
+                  invalid={!formElement.config.valid}
                   value={formElement.config.value}
+                  shouldValidate={formElement.config.validation}
                   changed={event => this.inputChangedHandler(event, formElement.id)}
                />
             ))}
