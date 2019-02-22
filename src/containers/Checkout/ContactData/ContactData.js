@@ -53,7 +53,7 @@ class ContactData extends Component {
             <input className="Input" type="text" name="street" placeholder="Street" />
             <input className="Input" type="text" name="postal" placeholder="Post Code" />
             <Button btnType="Success" clicked={this.orderHandler}>
-               ORDER2
+               Order
             </Button>
          </form>
       )
