@@ -87,28 +87,7 @@ class BurgerBuilder extends Component {
    }
 
    continuePurchaseHandler = () => {
-      this.setState({ loading: true })
-      const order = {
-         ingredients: this.state.ingredients,
-         price: this.state.totalPrice,
-         customer: {
-            name: "Max",
-            address: {
-               address: "Testreet 1",
-               zipCode: "324324",
-               country: "Germany",
-            },
-            email: "goxr3plus@gmail.com",
-         },
-         deliveryMethod: "fastest",
-      }
-
-      //Firebase specific
-      axiosInstance
-         .post("/orders.json", order)
-         .then(response => this.setState({ loading: false, purchasing: false }))
-         .catch(error => this.setState({ loading: false, purchasing: false }))
-
+ 
       //const queryParams = []
       const queryParams = qs.stringify(this.state.ingredients);
       //queryParams.push(encodeURIComponent("ingedients") + "=" + encodeURIComponent(this.state.ingredients))
@@ -118,7 +97,7 @@ class BurgerBuilder extends Component {
 
       this.props.history.push({
          pathname: "/checkout",
-         search: "?" + queryParams, //.join("&"),
+         search: "?" + queryParams+":"+this.state.totalPrice.toFixed(2), //.join("&"),
       })
    }
 

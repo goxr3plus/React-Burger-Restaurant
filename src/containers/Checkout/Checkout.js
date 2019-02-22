@@ -1,29 +1,19 @@
-import React, { Component } from "react"
-import CheckoutSummary from "../../components/Order/CheckoutSummary/CheckoutSummary"
 import qs from "qs"
+import React, { Component } from "react"
 import { Route } from "react-router-dom"
+import CheckoutSummary from "../../components/Order/CheckoutSummary/CheckoutSummary"
 import ContactData from "./ContactData/ContactData"
 
 class Checkout extends Component {
    state = {
       ingredients: [],
+      totalPrice: 0,
    }
 
-   componentDidMount() {
-      // console.log(this.props.location.search)
-      // const query = new URLSearchParams(this.props.location.search)
-
-      // console.log(query)
-
-      const ingredients = qs.parse(this.props.location.search, { ignoreQueryPrefix: true })
-
-      console.log(ingredients)
-      //const firstParamData = query.ingredients(0)[1]
-      // for (let param of query.entries()) {
-      //    // ['salad','1']
-      //    ingredients[param[0]] = +param[1]
-      // }
-      this.setState({ ingredients: Object.values(ingredients) })
+   componentWillMount() {
+      const totalPrize = +this.props.location.search.split(":")[1]
+      const ingredients = qs.parse(this.props.location.search.split(":")[0], { ignoreQueryPrefix: true })
+      this.setState({ ingredients: Object.values(ingredients), totalPrice: totalPrize })
    }
 
    checkoutCancelledHandler = () => {
@@ -35,7 +25,6 @@ class Checkout extends Component {
    }
 
    render() {
-      // console.log("[Checkout.js] " + this.props)
       return (
          <div>
             <CheckoutSummary
@@ -43,7 +32,10 @@ class Checkout extends Component {
                checkoutCancelled={this.checkoutCancelledHandler}
                checkoutContinued={this.checkoutContinuedHandler}
             />
-            <Route path={this.props.match.path + "/contact-data"} component={ContactData} />
+            <Route
+               path={this.props.match.path + "/contact-data"}
+               render={(props) => <ContactData ingredients={this.state.ingredients} totalPrice={this.state.totalPrice} {...props} />}
+            />
          </div>
       )
    }

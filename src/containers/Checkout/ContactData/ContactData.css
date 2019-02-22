@@ -2,6 +2,11 @@
    margin: 20px auto;
    width: 80%;
    text-align: center;
+   box-shadow: 0 2px 3px white;
+   border: 1px solid black;
+   padding:10px;
+   box-sizing: border-box;
+
 }
 
 .Input{
