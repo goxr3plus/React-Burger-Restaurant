@@ -10,9 +10,9 @@ class App extends Component {
       return (
          <Layout>
             <Switch>
-               <Route path="/" exact component={BurgerBuilder} />
                <Route path="/orders" component={Orders} />
                <Route path="/checkout" component={Checkout} />
+               <Route path="/" exact component={BurgerBuilder} />
                <Route render={() => <h1> 404 PAGE NOT FOUND </h1>} />
                {/* <Redirect from="/" to="/React-Burger-Restaurant" /> */}
             </Switch>
