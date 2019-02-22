@@ -37,7 +37,11 @@ const Input = props => {
 
    let validationError = null
    if (props.invalid && props.touched) {
-      validationError = <p className={"ValidationError"}><strong>B R O</strong> , focus...</p>;
+      validationError = (
+         <p className={"ValidationError"}>
+            <strong>B R O</strong> , focus... <br/> don't make mistakes
+         </p>
+      )
    }
 
    return (

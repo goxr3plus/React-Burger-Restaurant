@@ -7,6 +7,7 @@ import "./ContactData.css"
 
 class ContactData extends Component {
    state = {
+      formIsValid: false,
       orderForm: {
          name: {
             elementType: "input",
@@ -82,6 +83,7 @@ class ContactData extends Component {
             },
             value: "",
             touched: false,
+            valid: true,
          },
       },
       loading: false,
@@ -137,8 +139,11 @@ class ContactData extends Component {
       updatedFormElement.valid = this.checkValidity(updatedFormElement.value, updatedFormElement.validation)
       updatedFormElement.touched = true
       updatedOrderForm[identifier] = updatedFormElement
-      console.log(updatedFormElement.valid)
-      this.setState({ orderForm: updatedOrderForm })
+
+      let formIsValid = true
+      for (let inputIdentifier in updatedOrderForm) formIsValid = updatedOrderForm[inputIdentifier].valid && formIsValid
+
+      this.setState({ formIsValid: formIsValid, orderForm: updatedOrderForm })
    }
 
    render() {
@@ -167,7 +172,7 @@ class ContactData extends Component {
                   changed={event => this.inputChangedHandler(event, formElement.id)}
                />
             ))}
-            <Button btnType="Success" clicked={this.orderHandler}>
+            <Button btnType="Success" disabled={!this.state.formIsValid} clicked={this.orderHandler}>
                Order
             </Button>
          </form>
