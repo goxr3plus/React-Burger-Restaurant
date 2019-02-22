@@ -4,13 +4,8 @@
    text-align: center;
    box-shadow: 0 2px 3px white;
    border: 1px solid black;
-   padding:10px;
+   padding: 10px;
    box-sizing: border-box;
-
-}
-
-.Input{
-    display: block;
 }
 
 @media (min-width: 600px) {
