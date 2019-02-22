@@ -8,6 +8,16 @@
   font-size: 1.2rem;
 }
 
+.Burger2 {
+  width: 20%;
+  margin: auto;
+  height: 120px;
+  overflow: auto;
+  text-align: left;
+  font-weight: bold;
+  font-size: 1.2rem;
+}
+
 
 @media (min-width: 500px) and (min-height: 400px) {
     .Burger {
