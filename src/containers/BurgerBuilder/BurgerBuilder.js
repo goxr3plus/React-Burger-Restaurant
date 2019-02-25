@@ -12,7 +12,6 @@ import withErrorHandler from "./../../hoc/withErrorHandler/withErrorHandler"
 
 class BurgerBuilder extends Component {
    state = {
-      purchasable: false,
       purchasing: false,
       loading: false,
       error: false,
@@ -26,7 +25,6 @@ class BurgerBuilder extends Component {
             // console.log(this.state.ingredients)
             this.setState({
                ingredients: ["salad", "bacon", "cheese", "meat"],
-               purchasable: !this.isBurgerEmpty(response.data),
             })
          })
          .catch(error => {
@@ -36,12 +34,7 @@ class BurgerBuilder extends Component {
    }
 
    isBurgerEmpty = ingredients => {
-      // console.log("Ingredients Length :",ingredients.length)
       return ingredients.length === 0
-   }
-
-   updatePurchaseState = ingredients => {
-      this.setState({ purchasable: !this.isBurgerEmpty(ingredients) })
    }
 
    purchaseHandler = () => {
@@ -85,7 +78,7 @@ class BurgerBuilder extends Component {
                   add={this.props.addIngredient}
                   remove={this.props.removeIngredient}
                   totalPrice={this.props.totalPrice}
-                  purchasable={this.state.purchasable}
+                  purchasable={!this.isBurgerEmpty(this.props.ingredients)}
                   purchaseHandler={this.purchaseHandler}
                />
             </>
