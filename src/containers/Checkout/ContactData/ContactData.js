@@ -4,6 +4,7 @@ import axiosInstance from "./../../../axios-orders"
 import Input from "./../../../components/UI/Input/Input"
 import Spinner from "./../../../components/UI/Spinner/Spinner"
 import "./ContactData.css"
+import { connect } from "react-redux"
 
 class ContactData extends Component {
    state = {
@@ -186,5 +187,14 @@ class ContactData extends Component {
       )
    }
 }
+const mapStateToProps = state => {
+   return {
+      ingredients: state.ingredients,
+      totalPrice: state.totalPrice,
+   }
+}
 
-export default ContactData
+export default connect(
+   mapStateToProps,
+   null
+)(ContactData)

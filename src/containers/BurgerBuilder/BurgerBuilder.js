@@ -1,4 +1,3 @@
-import qs from "qs"
 import React, { Component } from "react"
 import { connect } from "react-redux"
 import axiosInstance from "../../axios-orders"
@@ -45,18 +44,8 @@ class BurgerBuilder extends Component {
       this.setState({ purchasing: false })
    }
 
-   continuePurchaseHandler = () => {
-      //const queryParams = []
-      const queryParams = qs.stringify(this.props.ingredients)
-      //queryParams.push(encodeURIComponent("ingedients") + "=" + encodeURIComponent(this.state.ingredients))
-      // for (let i in this.state.ingredients) {
-      //    queryParams.push(encodeURIComponent(i) + "=" + encodeURIComponent(this.state.ingredients[i]))
-      // }
-
-      this.props.history.push({
-         pathname: "/checkout",
-         search: "?" + queryParams + ":" + this.props.totalPrice.toFixed(2), //.join("&"),
-      })
+   purchaseContinueHandler = () => {
+      this.props.history.push("/checkout")
    }
 
    render() {
@@ -92,7 +81,7 @@ class BurgerBuilder extends Component {
                totalPrice={this.props.totalPrice.toFixed(2)}
                ingredients={this.props.ingredients}
                cancelPurchaseHandler={this.cancelPurchaseHandler}
-               continuePurchaseHandler={this.continuePurchaseHandler}
+               continuePurchaseHandler={this.purchaseContinueHandler}
             />
          )
       }
