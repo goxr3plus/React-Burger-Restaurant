@@ -8,6 +8,9 @@ Under heavy development [Try it](https://goxr3plus.github.io/React-Burger-Restau
   - Connecting to realtime [Firebase database](https://react-my-burger-c7029.firebaseio.com/) mobile and web application development platform 
   - Using [Axios.js](https://github.com/axios/axios) Promise based HTTP client for the browser and node.js
 
+### [How](https://codeburst.io/deploy-react-to-github-pages-to-create-an-amazing-website-42d8b09cd4d) to deploy your React App with Github ?
+
+
 >npm install
 >npm start
 
