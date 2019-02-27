@@ -34,9 +34,10 @@ class Orders extends Component {
             {this.state.loading ? (
                <Spinner />
             ) : (
+               this.state.orders.length !==0 ?
                this.state.orders.map(order => (
                   <Order key={order.id} ingredients={order.ingredients} price={order.price} />
-               ))
+               )) : <h1 style={{textAlign: "center"}}>No orders yet :)</h1>
             )}
          </div>
       )
