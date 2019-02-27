@@ -1,13 +1,13 @@
-import React, { Component } from "react"
-import { connect } from "react-redux"
-import axiosInstance from "../../axios-orders"
-import OrderSummary from "../../components/Burger/OrderSummary/OrderSummary"
-import * as actionTypes from "../../store/actions/actionsTypes"
-import BuildControls from "./../../components/Burger/BuildControls/BuildControls"
-import Burger from "./../../components/Burger/Burger"
-import Modal from "./../../components/UI/Modal/Modal"
-import Spinner from "./../../components/UI/Spinner/Spinner"
-import withErrorHandler from "./../../hoc/withErrorHandler/withErrorHandler"
+import React, { Component } from "react";
+import { connect } from "react-redux";
+import axiosInstance from "../../axios-orders";
+import OrderSummary from "../../components/Burger/OrderSummary/OrderSummary";
+import { addIngredient, removeIngredient } from "../../store/actions/index";
+import BuildControls from "./../../components/Burger/BuildControls/BuildControls";
+import Burger from "./../../components/Burger/Burger";
+import Modal from "./../../components/UI/Modal/Modal";
+import Spinner from "./../../components/UI/Spinner/Spinner";
+import withErrorHandler from "./../../hoc/withErrorHandler/withErrorHandler";
 
 class BurgerBuilder extends Component {
    state = {
@@ -108,9 +108,9 @@ const mapStateToProps = state => {
 
 const mapDispatchToProps = dispatch => {
    return {
-      addIngredient: ingredientName => dispatch({ type: actionTypes.ADD_INGREDIENT, ingredientName: ingredientName }),
+      addIngredient: ingredientName => dispatch(addIngredient(ingredientName)),
       removeIngredient: ingredientName =>
-         dispatch({ type: actionTypes.REMOVE_INGREDIENT, ingredientName: ingredientName }),
+         dispatch(removeIngredient(ingredientName)),
    }
 }
 

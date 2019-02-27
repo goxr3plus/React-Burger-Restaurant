@@ -12,7 +12,7 @@ const initialState = {
    totalPrice: 4,
 }
 
-const reducer = (state = initialState, action) => {
+const burgerBuilder = (state = initialState, action) => {
    switch (action.type) {
       case actionTypes.ADD_INGREDIENT:
          const updatedIngredients1 = state.ingredients.concat(action.ingredientName)
@@ -51,4 +51,4 @@ const reducer = (state = initialState, action) => {
    }
 }
 
-export default reducer
+export default burgerBuilder
