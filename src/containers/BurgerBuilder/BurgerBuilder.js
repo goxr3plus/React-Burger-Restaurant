@@ -1,35 +1,21 @@
-import React, { Component } from "react";
-import { connect } from "react-redux";
-import axiosInstance from "../../axios-orders";
-import OrderSummary from "../../components/Burger/OrderSummary/OrderSummary";
-import { addIngredient, removeIngredient } from "../../store/actions/index";
-import BuildControls from "./../../components/Burger/BuildControls/BuildControls";
-import Burger from "./../../components/Burger/Burger";
-import Modal from "./../../components/UI/Modal/Modal";
-import Spinner from "./../../components/UI/Spinner/Spinner";
-import withErrorHandler from "./../../hoc/withErrorHandler/withErrorHandler";
+import React, { Component } from "react"
+import { connect } from "react-redux"
+import axiosInstance from "../../axios-orders"
+import OrderSummary from "../../components/Burger/OrderSummary/OrderSummary"
+import { addIngredient, removeIngredient, initIngredients } from "../../store/actions/index"
+import BuildControls from "./../../components/Burger/BuildControls/BuildControls"
+import Burger from "./../../components/Burger/Burger"
+import Modal from "./../../components/UI/Modal/Modal"
+import Spinner from "./../../components/UI/Spinner/Spinner"
+import withErrorHandler from "./../../hoc/withErrorHandler/withErrorHandler"
 
 class BurgerBuilder extends Component {
    state = {
       purchasing: false,
-      loading: false,
-      error: false,
    }
 
-   componentWillMount(props) {
-      // ingredients: ["salad", "bacon", "cheese", "meat"]
-      axiosInstance
-         .get("ingredients.json")
-         .then(response => {
-            // console.log(this.state.ingredients)
-            this.setState({
-               ingredients: ["salad", "bacon", "cheese", "meat"],
-            })
-         })
-         .catch(error => {
-            this.setState({ error: true })
-            // console.log(error)
-         })
+   componentDidMount() {
+      this.props.initIngredients()
    }
 
    isBurgerEmpty = ingredients => {
@@ -56,7 +42,7 @@ class BurgerBuilder extends Component {
       disabledInfo["meat"] = !this.props.ingredients.includes("meat")
 
       let orderSummary = null
-      let burger = this.state.error ? <p style={{ textAlign: "center" }}> Ingredients can't be loaded </p> : <Spinner />
+      let burger = this.props.error ? <p style={{ textAlign: "center" }}> Ingredients can't be loaded </p> : <Spinner />
       if (this.props.ingredients !== null) {
          // Burger
          burger = (
@@ -74,7 +60,7 @@ class BurgerBuilder extends Component {
          )
 
          // OrderSummary
-         orderSummary = this.state.loading ? (
+         orderSummary = this.props.loading ? (
             <Spinner />
          ) : (
             <OrderSummary
@@ -86,14 +72,14 @@ class BurgerBuilder extends Component {
          )
       }
 
-      if (this.state.loading) orderSummary = <Spinner />
+      if (this.props.loading) orderSummary = <Spinner />
 
       return (
          <>
             <Modal show={this.state.purchasing} cancelPurchaseHandler={this.cancelPurchaseHandler}>
                {orderSummary}
             </Modal>
-            {burger}
+            {!this.props.loading ? burger : orderSummary}
          </>
       )
    }
@@ -103,14 +89,16 @@ const mapStateToProps = state => {
    return {
       ingredients: state.ingredients,
       totalPrice: state.totalPrice,
+      error: state.error,
+      loading: state.loading,
    }
 }
 
 const mapDispatchToProps = dispatch => {
    return {
       addIngredient: ingredientName => dispatch(addIngredient(ingredientName)),
-      removeIngredient: ingredientName =>
-         dispatch(removeIngredient(ingredientName)),
+      removeIngredient: ingredientName => dispatch(removeIngredient(ingredientName)),
+      initIngredients: () => dispatch(initIngredients()),
    }
 }
 
