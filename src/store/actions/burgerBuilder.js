@@ -39,13 +39,13 @@ export const initIngredients = () => {
    return dispatch => {
       dispatch(loading(true))
       axiosInstance
-         .get("/ingredients")
+         .get("/ingredients.json")
          .then(response => {
             dispatch(setIngredients(["salad", "cheese"]))
             dispatch(loading(false))
          })
          .catch(error => {
-            console.log("err")
+            // console.log("err")
             dispatch(fetchIngredientsFailed())
             dispatch(loading(false))
          })

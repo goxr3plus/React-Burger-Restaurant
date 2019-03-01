@@ -43,6 +43,7 @@ class BurgerBuilder extends Component {
 
       let orderSummary = null
       let burger = this.props.error ? <p style={{ textAlign: "center" }}> Ingredients can't be loaded </p> : <Spinner />
+
       if (this.props.ingredients !== null) {
          // Burger
          burger = (
