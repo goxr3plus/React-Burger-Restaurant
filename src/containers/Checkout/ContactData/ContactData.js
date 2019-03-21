@@ -5,6 +5,8 @@ import Input from "./../../../components/UI/Input/Input"
 import Spinner from "./../../../components/UI/Spinner/Spinner"
 import "./ContactData.css"
 import { connect } from "react-redux"
+import withErrorHandler from "../../../hoc/withErrorHandler/withErrorHandler"
+import * as actions from "../../../store/actions/index"
 
 class ContactData extends Component {
    state = {
@@ -88,7 +90,6 @@ class ContactData extends Component {
             valid: true,
          },
       },
-      loading: false,
    }
 
    checkValidity(value, rules) {
@@ -111,7 +112,6 @@ class ContactData extends Component {
 
    orderHandler = event => {
       event.preventDefault()
-      this.setState({ loading: true })
       const formData = {}
       for (let elementIdentifier in this.state.orderForm) {
          formData[elementIdentifier] = this.state.orderForm[elementIdentifier].value
@@ -123,18 +123,13 @@ class ContactData extends Component {
          orderData: formData,
       }
 
-      //Firebase specific
-      axiosInstance
-         .post("/orders.json", order)
-         .then(response => {
-            this.setState({ loading: false })
-            //  this.props.history.push("/")
-         })
-         .catch(error => this.setState({ loading: false }))
+      this.props.onOrderBurger(order)
    }
 
    inputChangedHandler = (event, identifier) => {
-      const updatedOrderForm = { ...this.state.orderForm }
+      const updatedOrderForm = {
+         ...this.state.orderForm,
+      }
       const updatedFormElement = { ...updatedOrderForm[identifier] }
 
       updatedFormElement.value = event.target.value
@@ -194,7 +189,11 @@ const mapStateToProps = state => {
    }
 }
 
+const mapDispatchToProps = dispatch => {
+   onOrderBurger: orderData => dispatch(actions.purchaseBurgerStart(orderData))
+}
+
 export default connect(
    mapStateToProps,
-   null
-)(ContactData)
+   mapDispatchToProps
+)(withErrorHandler(ContactData, axiosInstance))
