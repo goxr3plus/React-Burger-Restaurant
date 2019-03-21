@@ -21,8 +21,8 @@ export const purchaseBurgerStart = orderData => {
       axiosInstance
          .post("/orders.json", orderData)
          .then(response => {
-            console.log("object")
             dispatch(purchaseBurgerSuccess(response.data, orderData))
+            console.log(orderData)
             //   this.setState({ loading: false })
             //  this.props.history.push("/")
          })
