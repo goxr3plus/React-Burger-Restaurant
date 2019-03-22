@@ -31,7 +31,10 @@ const order = props => {
          </p>
          <Burger ingredients={ingredients} classy="Burger2" />
          <p>
-            Price: <strong>USD {props.price}</strong>{" "}
+            Price: <strong>USD {props.price.toFixed(2)}</strong>
+         </p>
+         <p>
+            Delivery method: <strong>{props.deliveryMethod}</strong>
          </p>
       </div>
    )
