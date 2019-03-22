@@ -7,10 +7,10 @@ class OrderSummary extends Component {
    }
 
    render() {
-      const ingredientSummary = Object.keys(this.props.ingredients).map(igKey => {
+      const ingredientSummary = Object.keys(this.props.ingredients).map(ingredient => {
          return (
-            <li key={igKey}>
-               <span style={{ textTransform: "capitalize" }}>{igKey}</span>: {this.props.ingredients[igKey]}
+            <li key={ingredient}>
+               <span style={{ textTransform: "capitalize" }}>{ingredient}</span>: {this.props.ingredients[ingredient]}
             </li>
          )
       })

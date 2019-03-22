@@ -5,12 +5,11 @@ const initialState = {
    loading: false,
 }
 
-const reducer = (state = initialState, action) => {
+const orderReducer = (state = initialState, action) => {
    switch (action.type) {
       case actionTypes.PURCHASE_BURGER_START:
-         console.log('"PURCHASE_BURGER_START"')
          return {
-            ...orders,
+            ...state,
             loading: true,
          }
       case actionTypes.PURCHASE_BURGER_SUCCESS:
@@ -25,7 +24,7 @@ const reducer = (state = initialState, action) => {
          }
       case actionTypes.PURCHASE_BURGER_FAIL:
          return {
-            ...orders,
+            ...state,
             loading: false,
          }
 
@@ -33,3 +32,5 @@ const reducer = (state = initialState, action) => {
          return state
    }
 }
+
+export default orderReducer

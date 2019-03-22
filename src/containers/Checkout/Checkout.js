@@ -16,7 +16,8 @@ class Checkout extends Component {
 
    render() {
       let summary = <Redirect to="/" />
-      if (this.props.ingredients.length !== 0) {
+      console.log(this.props.ingredients)
+      // if (this.props.ingredients.length !== 0) {
          summary = (
             <div>
                <CheckoutSummary
@@ -27,15 +28,15 @@ class Checkout extends Component {
                <Route path={this.props.match.path + "/contact-data"} component={ContactData} />
             </div>
          )
-      }
+      // }
       return summary
    }
 }
 
 const mapStateToProps = state => {
    return {
-      ingredients: state.ingredients,
-      totalPrice: state.totalPrice,
+      ingredients: state.burgerBuilder.ingredients,
+      totalPrice: state.burgerBuilder.totalPrice,
    }
 }
 
