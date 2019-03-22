@@ -123,7 +123,7 @@ class ContactData extends Component {
          orderData: formData,
       }
 
-      this.props.onOrderBurger(order)
+      this.props.purchaseBurger(order)
    }
 
    inputChangedHandler = (event, identifier) => {
@@ -152,7 +152,8 @@ class ContactData extends Component {
          })
       }
 
-      let form = this.state.loading ? (
+      console.log(this.props.loading)
+      let form = this.props.loading ? (
          <Spinner />
       ) : (
          <form onSubmit={this.orderHandler}>
@@ -186,12 +187,13 @@ const mapStateToProps = state => {
    return {
       ingredients: state.ingredients,
       totalPrice: state.totalPrice,
+      loading: state.loading,
    }
 }
 
 const mapDispatchToProps = dispatch => {
    return {
-      onOrderBurger: orderData => dispatch(actions.purchaseBurgerStart(orderData)),
+      purchaseBurger: orderData => dispatch(actions.purchaseBurger(orderData)),
    }
 }
 

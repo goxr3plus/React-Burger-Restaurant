@@ -5,9 +5,9 @@ import { withRouter } from "react-router-dom"
 
 const burger = props => {
    // console.log(props)
-   let transformedIngredients = props.ingredients.map((igKey, i) => {
+   let transformedIngredients = props.ingredients.map((ingredient, i) => {
       //  console.log("Ig Key :" + igKey)
-      return <BurgerIngredient key={igKey + i} type={igKey} />
+      return <BurgerIngredient key={ingredient + i} type={ingredient} />
    })
 
    if (transformedIngredients.length === 0) transformedIngredients = <p style={{ textAlign: "center" }}>Empty!</p>
