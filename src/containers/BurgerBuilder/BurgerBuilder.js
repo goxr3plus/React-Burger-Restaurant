@@ -2,7 +2,7 @@ import React, { Component } from "react"
 import { connect } from "react-redux"
 import axiosInstance from "../../axios-orders"
 import OrderSummary from "../../components/Burger/OrderSummary/OrderSummary"
-import { addIngredient, removeIngredient, initIngredients } from "../../store/actions/index"
+import * as actions from "../../store/actions/index"
 import BuildControls from "./../../components/Burger/BuildControls/BuildControls"
 import Burger from "./../../components/Burger/Burger"
 import Modal from "./../../components/UI/Modal/Modal"
@@ -31,6 +31,7 @@ class BurgerBuilder extends Component {
    }
 
    purchaseContinueHandler = () => {
+      this.props.onInitPurchase()
       this.props.history.push("/checkout")
    }
 
@@ -42,7 +43,11 @@ class BurgerBuilder extends Component {
       disabledInfo["meat"] = !this.props.ingredients.includes("meat")
 
       let orderSummary = null
-      let burger = this.props.error ? <p style={{ textAlign: "center" }}> Ingredients can't be loaded </p> : <Spinner />
+      let burger = this.props.error ? (
+         <p style={{ textAlign: "center" }}> Ingredients can't be loaded </p>
+      ) : (
+         <Spinner />
+      )
 
       if (this.props.ingredients !== null) {
          // Burger
@@ -97,9 +102,10 @@ const mapStateToProps = state => {
 
 const mapDispatchToProps = dispatch => {
    return {
-      addIngredient: ingredientName => dispatch(addIngredient(ingredientName)),
-      removeIngredient: ingredientName => dispatch(removeIngredient(ingredientName)),
-      initIngredients: () => dispatch(initIngredients()),
+      addIngredient: ingredientName => dispatch(actions.addIngredient(ingredientName)),
+      removeIngredient: ingredientName => dispatch(actions.removeIngredient(ingredientName)),
+      initIngredients: () => dispatch(actions.initIngredients()),
+      onInitPurchase: () => dispatch(actions.purchaseInit()),
    }
 }
 

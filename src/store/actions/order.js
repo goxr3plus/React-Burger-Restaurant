@@ -29,10 +29,15 @@ export const purchaseBurger = orderData => {
          .post("/orders.json", orderData)
          .then(response => {
             dispatch(purchaseBurgerSuccess(response.data.name, orderData))
-            console.log(response.data)
          })
          .catch(error => {
             purchaseBurgerFail(error)
          })
+   }
+}
+
+export const purchaseInit = () => {
+   return {
+      type: actionTypes.PURCHASE_INIT,
    }
 }
