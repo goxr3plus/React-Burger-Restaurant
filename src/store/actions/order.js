@@ -61,11 +61,11 @@ export const fetchOrdersStart = () => {
       type: actionTypes.FETCH_ORDERS_START,
    }
 }
-export const fetchOrders = () => {
+export const fetchOrders = token => {
    return dispatch => {
       dispatch(fetchOrdersStart())
       axiosInstance
-         .get("/orders.json")
+         .get(`/orders.json?auth=${token}`)
          .then(result => {
             const fetchedOrders = []
             for (let key in result.data) {

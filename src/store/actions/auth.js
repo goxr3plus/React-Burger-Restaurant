@@ -22,6 +22,20 @@ export const authFailed = error => {
    }
 }
 
+export const logout = () => {
+   return {
+      type: actionTypes.AUTH_LOGOUT,
+   }
+}
+
+export const checkAuthTimeout = expirationTime => {
+   return dispatch => {
+      setTimeout(() => {
+         dispatch(logout())
+      }, expirationTime * 1000)
+   }
+}
+
 export const auth = (email, password, isSignUp) => {
    return dispatch => {
       dispatch(authStart())
@@ -39,6 +53,7 @@ export const auth = (email, password, isSignUp) => {
          .then(res => {
             console.log(res)
             dispatch(authSuccess(res.data.idToken, res.data.localId))
+            dispatch(checkAuthTimeout(res.data.expiresIn))
          })
          .catch(err => {
             console.error(err)
@@ -48,7 +63,10 @@ export const auth = (email, password, isSignUp) => {
             let map = new Map()
             map.set("INVALID_EMAIL", "Email is invalid")
             map.set("MISSING_PASSWORD", "Password is missing")
-            map.set("WEAK_PASSWORD : Password should be at least 6 characters", "Password should be at least 6 characters")
+            map.set(
+               "WEAK_PASSWORD : Password should be at least 6 characters",
+               "Password should be at least 6 characters"
+            )
 
             //Determine the final message
             let finalMessage =

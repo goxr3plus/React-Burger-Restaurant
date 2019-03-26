@@ -16,6 +16,8 @@ const reducer = (state = initialState, action) => {
          return authSuccess(state, action)
       case actionTypes.AUTH_FAILED:
          return authFailed(state, action)
+      case actionTypes.AUTH_LOGOUT:
+         return authLogout(state, action)
       default:
          return state
    }
@@ -41,6 +43,10 @@ const authSuccess = (state, action) => {
       loading: false,
    })
 }
-
-export default reducer;
-
+const authLogout = (state, action) => {
+   return updateObject(state, {
+      token: null,
+      userId: null,
+   })
+}
+export default reducer
