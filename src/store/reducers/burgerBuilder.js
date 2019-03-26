@@ -18,42 +18,62 @@ const initialState = {
 const burgerBuilder = (state = initialState, action) => {
    switch (action.type) {
       case actionTypes.ADD_INGREDIENT:
-         let updatedIngredients = state.ingredients.concat(action.ingredientName)
-         return updateObject(state, {
-            ingredients: updatedIngredients,
-            totalPrice: state.totalPrice + INGREDIENT_PRICES[action.ingredientName],
-         })
+         return addIngredient(state, action)
       case actionTypes.REMOVE_INGREDIENT:
-         updatedIngredients = [...state.ingredients]
-         let lastIndex = updatedIngredients.lastIndexOf(action.ingredientName)
-
-         // Enter if there are ingredients of this type
-         if (lastIndex !== -1) {
-            // Remove the last ingredient matching this type
-            updatedIngredients.splice(lastIndex, 1)
-         }
-         return updateObject(state, {
-            ingredients: updatedIngredients,
-            totalPrice: state.totalPrice - INGREDIENT_PRICES[action.ingredientName],
-         })
+         return removeIngredient(state, action)
       case actionTypes.SET_INGREDIENTS:
-         return updateObject(state, {
-            ingredients: action.ingredients,
-            totalPrice: 4,
-            error: false,
-         })
+         return setIngredients(state, action)
       case actionTypes.LOADING:
-         return updateObject(state, {
-            loading: action.loading,
-         })
+         return loading(state, action)
       case actionTypes.FETCH_INGREDIENTS_FAILED:
-         return updateObject(state, {
-            loading: action.error,
-            error: true,
-         })
+         return fetchIngredientsFailed(state, action)
       default:
          return state
    }
+}
+
+const setIngredients = (state, action) => {
+   return updateObject(state, {
+      ingredients: action.ingredients,
+      totalPrice: 4,
+      error: false,
+   })
+}
+
+const loading = (state, action) => {
+   return updateObject(state, {
+      loading: action.loading,
+   })
+}
+
+const fetchIngredientsFailed = (state, action) => {
+   return updateObject(state, {
+      loading: action.error,
+      error: true,
+   })
+}
+
+const addIngredient = (state, action) => {
+   let updatedIngredients = state.ingredients.concat(action.ingredientName)
+   return updateObject(state, {
+      ingredients: updatedIngredients,
+      totalPrice: state.totalPrice + INGREDIENT_PRICES[action.ingredientName],
+   })
+}
+
+const removeIngredient = (state, action) => {
+   let updatedIngredients = [...state.ingredients]
+   let lastIndex = updatedIngredients.lastIndexOf(action.ingredientName)
+
+   // Enter if there are ingredients of this type
+   if (lastIndex !== -1) {
+      // Remove the last ingredient matching this type
+      updatedIngredients.splice(lastIndex, 1)
+   }
+   return updateObject(state, {
+      ingredients: updatedIngredients,
+      totalPrice: state.totalPrice - INGREDIENT_PRICES[action.ingredientName],
+   })
 }
 
 export default burgerBuilder
