@@ -129,7 +129,7 @@ class Auth extends Component {
       if (this.props.loading) form = <Spinner />
 
       let errorMessage = null
-      if (this.props.error) errorMessage = <p> {this.props.error.message}</p>
+      if (this.props.error) errorMessage = <p> {this.props.error}</p>
       return (
          <div className="Auth">
             {errorMessage}

@@ -42,7 +42,21 @@ export const auth = (email, password, isSignUp) => {
          })
          .catch(err => {
             console.error(err)
-            dispatch(authFailed(err.response.data.error))
+            let errorMessage = err.response.data.error.message
+
+            //Create a Mapper for errors
+            let map = new Map()
+            map.set("INVALID_EMAIL", "Email is invalid")
+            map.set("MISSING_PASSWORD", "Password is missing")
+            map.set("WEAK_PASSWORD : Password should be at least 6 characters", "Password should be at least 6 characters")
+
+            //Determine the final message
+            let finalMessage =
+               map.get(errorMessage) !== undefined ? map.get(errorMessage) : errorMessage
+            console.log(map.get(errorMessage))
+
+            //Dispatch Error
+            dispatch(authFailed(finalMessage))
          })
    }
 }
