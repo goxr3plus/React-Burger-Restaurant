@@ -12,7 +12,6 @@ const Input = props => {
 
    switch (props.elementType) {
       case "input":
-      console.log(props.changed)
          inputElement = (
             <input className={inputClasses} {...props.elementConfig} value={props.value} onChange={props.changed} />
          )
