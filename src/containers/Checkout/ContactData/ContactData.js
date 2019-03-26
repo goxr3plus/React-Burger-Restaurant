@@ -82,7 +82,10 @@ class ContactData extends Component {
          deliveryMethod: {
             elementType: "select",
             elementConfig: {
-               options: [{ value: "faster", displayValue: "Fastest" }, { value: "cheapest", displayValue: "Cheapest" }],
+               options: [
+                  { value: "faster", displayValue: "Fastest" },
+                  { value: "cheapest", displayValue: "Cheapest" },
+               ],
             },
             value: "fastest",
             touched: false,
@@ -123,7 +126,7 @@ class ContactData extends Component {
          orderData: formData,
       }
 
-      this.props.purchaseBurger(order)
+      this.props.purchaseBurger(order, this.props.token)
    }
 
    inputChangedHandler = (event, identifier) => {
@@ -133,12 +136,16 @@ class ContactData extends Component {
       const updatedFormElement = { ...updatedOrderForm[identifier] }
 
       updatedFormElement.value = event.target.value
-      updatedFormElement.valid = this.checkValidity(updatedFormElement.value, updatedFormElement.validation)
+      updatedFormElement.valid = this.checkValidity(
+         updatedFormElement.value,
+         updatedFormElement.validation
+      )
       updatedFormElement.touched = true
       updatedOrderForm[identifier] = updatedFormElement
 
       let formIsValid = true
-      for (let inputIdentifier in updatedOrderForm) formIsValid = updatedOrderForm[inputIdentifier].valid && formIsValid
+      for (let inputIdentifier in updatedOrderForm)
+         formIsValid = updatedOrderForm[inputIdentifier].valid && formIsValid
 
       this.setState({ formIsValid: formIsValid, orderForm: updatedOrderForm })
    }
@@ -168,7 +175,11 @@ class ContactData extends Component {
                   changed={event => this.inputChangedHandler(event, formElement.id)}
                />
             ))}
-            <Button btnType="Success" disabled={!this.state.formIsValid} clicked={this.orderHandler}>
+            <Button
+               btnType="Success"
+               disabled={!this.state.formIsValid}
+               clicked={this.orderHandler}
+            >
                Order
             </Button>
          </form>
@@ -186,12 +197,13 @@ const mapStateToProps = state => {
       ingredients: state.burgerBuilder.ingredients,
       totalPrice: state.burgerBuilder.totalPrice,
       loading: state.order.loading,
+      token: state.auth.token,
    }
 }
 
 const mapDispatchToProps = dispatch => {
    return {
-      purchaseBurger: orderData => dispatch(actions.purchaseBurger(orderData)),
+      purchaseBurger: (orderData, token) => dispatch(actions.purchaseBurger(orderData, token)),
    }
 }
 
