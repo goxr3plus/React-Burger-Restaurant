@@ -9,8 +9,10 @@ const Input = props => {
 
    inputClasses = inputClasses.join(" ")
 
+
    switch (props.elementType) {
       case "input":
+      console.log(props.changed)
          inputElement = (
             <input className={inputClasses} {...props.elementConfig} value={props.value} onChange={props.changed} />
          )
@@ -39,7 +41,7 @@ const Input = props => {
    if (props.invalid && props.touched) {
       validationError = (
          <p className={"ValidationError"}>
-            <strong>B R O</strong> , focus... <br/> don't make mistakes
+            <strong>Invalid :')</strong>
          </p>
       )
    }

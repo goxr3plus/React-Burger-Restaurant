@@ -156,7 +156,6 @@ class ContactData extends Component {
          <Spinner />
       ) : (
          <form onSubmit={this.orderHandler}>
-            {/* <Input elementType="" elementConfig="" value="" /> */}
             {forElementsArray.map(formElement => (
                <Input
                   key={formElement.id}
