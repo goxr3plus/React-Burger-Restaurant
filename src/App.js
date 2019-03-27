@@ -1,5 +1,5 @@
 import React, { Component } from "react"
-import { Route, Switch, withRouter } from "react-router-dom"
+import { Route, Switch, withRouter, Redirect } from "react-router-dom"
 import BurgerBuilder from "./containers/BurgerBuilder/BurgerBuilder"
 import Checkout from "./containers/Checkout/Checkout"
 import Layout from "./hoc/Layout/Layout"
@@ -15,24 +15,42 @@ class App extends Component {
    }
 
    render() {
-      return (
-         <Layout>
+      let routes = (
+         <Switch>
+            <Route path="/auth" component={Auth} />
+            <Route path="/" exact component={BurgerBuilder} />
+            <Redirect to="/" />
+         </Switch>
+      )
+
+      if (this.props.isAuthenticated) {
+         routes = (
             <Switch>
-               <Route path="/auth" component={Auth} />
-               <Route path="/orders" component={Orders} />
+               {this.props.isAuthenticated ? <Route path="/orders" component={Orders} /> : null}
                <Route path="/logout" component={Logout} />
                <Route path="/checkout" component={Checkout} />
                <Route path="/" exact component={BurgerBuilder} />
-               <Route render={() => <h1> 404 PAGE NOT FOUND </h1>} />
+
+               {/* <Route
+                  render={() => (
+                     <h1 style={{ textAlign: "center" }}>
+                        <strong>404 PAGE NOT FOUND </strong>
+                     </h1>
+                  )}
+               /> */}
 
                {/* <Redirect from="/" to="/React-Burger-Restaurant" /> */}
             </Switch>
-            {/*
+         )
+      }
 
-            <Route path="/" exact component={BurgerBuilder} />
-            <Route path="/checkout" component={Checkout} /> */}
-         </Layout>
-      )
+      return <Layout>{routes}</Layout>
+   }
+}
+
+const mapStateToProps = state => {
+   return {
+      isAuthenticated: state.auth.token !== null,
    }
 }
 
@@ -44,7 +62,7 @@ const mapDispatchToProps = dispatch => {
 
 export default withRouter(
    connect(
-      null,
+      mapStateToProps,
       mapDispatchToProps
    )(App)
 )

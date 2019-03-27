@@ -1,4 +1,5 @@
 import React, { Component } from "react"
+import Footer from "../../containers/Footer/Footer"
 import SideDrawer from "../../components/Navigation/SideDrawer/SideDrawer"
 import Toolbar from "../../components/Navigation/Toolbar/Toolbar"
 import { connect } from "react-redux"
@@ -26,12 +27,14 @@ class Layout extends Component {
                showSideDrawer={this.sideDrawerToggleHandler}
                isAuth={this.props.isAuthenticated}
             />
+
             <SideDrawer
                open={this.state.showSideDrawer}
                closed={this.sideDrawerClosedHandler}
                isAuth={this.props.isAuthenticated}
             />
             <main className={"Content"}>{this.props.children}</main>
+            {/* <Footer /> */}
          </>
       )
    }
