@@ -41,7 +41,7 @@ export const initIngredients = () => {
       axiosInstance
          .get("/ingredients.json")
          .then(response => {
-            dispatch(setIngredients(["salad", "cheese"]))
+            dispatch(setIngredients([]))
             dispatch(loading(false))
          })
          .catch(error => {
