@@ -16,6 +16,7 @@ class BurgerBuilder extends Component {
 
    componentDidMount() {
       this.props.initIngredients()
+      
    }
 
    isBurgerEmpty = ingredients => {
@@ -24,7 +25,10 @@ class BurgerBuilder extends Component {
 
    purchaseHandler = () => {
       if (this.props.isAuthenticated) this.setState({ purchasing: true })
-      else this.props.history.push("/auth")
+      else {
+         this.props.onSetAuthRedirectPath("/checkout")
+         this.props.history.push("/auth")
+      }
    }
 
    cancelPurchaseHandler = () => {
@@ -109,6 +113,7 @@ const mapDispatchToProps = dispatch => {
       removeIngredient: ingredientName => dispatch(actions.removeIngredient(ingredientName)),
       initIngredients: () => dispatch(actions.initIngredients()),
       onInitPurchase: () => dispatch(actions.purchaseInit()),
+      onSetAuthRedirectPath: path => dispatch(actions.setAuthRedirectPath(path)),
    }
 }
 

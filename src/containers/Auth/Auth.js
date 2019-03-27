@@ -42,6 +42,12 @@ class Auth extends Component {
       isSignUp: true,
    }
 
+   componentDidMount() {
+      if (!this.props.burgerBuilding && this.props.authRedirectPath) {
+         this.props.onSetAuthRedirectPath()
+      }
+   }
+
    checkValidity(value, rules) {
       let isValid = true
       if (!rules) {
@@ -91,7 +97,7 @@ class Auth extends Component {
 
    submitHandler = event => {
       event.preventDefault()
-      this.props.authentication(
+      this.props.onAuth(
          this.state.controls.email.value,
          this.state.controls.password.value,
          this.state.isSignUp
@@ -128,7 +134,9 @@ class Auth extends Component {
          />
       ))
       if (this.props.loading) form = <Spinner />
-      if (this.props.isAuthenticated) form = <Redirect to="/" />
+      if (this.props.isAuthenticated) {
+         form = <Redirect to={this.props.authRedirectPath} />
+      }
 
       let errorMessage = null
       if (this.props.error) errorMessage = <p> {this.props.error}</p>
@@ -152,13 +160,15 @@ const mapStateToProps = state => {
       loading: state.auth.loading,
       error: state.auth.error,
       isAuthenticated: state.auth.token !== null,
+      burgerBuilding: state.burgerBuilder.building,
+      authRedirectPath: state.auth.authRedirectPath,
    }
 }
 
 const mapDispatchToProps = dispatch => {
    return {
-      authentication: (email, password, isSignUp) =>
-         dispatch(actions.auth(email, password, isSignUp)),
+      onAuth: (email, password, isSignUp) => dispatch(actions.auth(email, password, isSignUp)),
+      onSetAuthRedirectPath: path => dispatch(actions.setAuthRedirectPath("/")),
    }
 }
 

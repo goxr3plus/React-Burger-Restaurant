@@ -13,7 +13,7 @@ const Input = props => {
    switch (props.elementType) {
       case "input":
          inputElement = (
-            <input className={inputClasses} {...props.elementConfig} value={props.value} onChange={props.changed} />
+            <input className={inputClasses} {...props.elementConfig} value={props.value} onChange={props.changed} autoComplete=""/>
          )
          break
       case "textarea":
