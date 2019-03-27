@@ -23,6 +23,10 @@ export const authFailed = error => {
 }
 
 export const logout = () => {
+   //LocalStorage
+   localStorage.removeItem("token")
+   localStorage.removeItem("expirationDate")
+   localStorage.removeItem("userId")
    return {
       type: actionTypes.AUTH_LOGOUT,
    }
@@ -57,10 +61,24 @@ export const auth = (email, password, isSignUp) => {
       console.log(url)
       axios
          .post(url, authData)
-         .then(res => {
-            console.log(res)
-            dispatch(authSuccess(res.data.idToken, res.data.localId))
-            dispatch(checkAuthTimeout(res.data.expiresIn))
+         .then(response => {
+            console.log(response)
+
+            //Variables
+            const idToken = response.data.idToken
+            const expirationDateTime = new Date(
+               new Date().getTime() + response.data.expiresIn * 1000
+            )
+            const userId = response.data.localId
+
+            //LocalStorage
+            localStorage.setItem("token", idToken)
+            localStorage.setItem("expirationDate", expirationDateTime)
+            localStorage.setItem("userId", userId)
+
+            //Dispatch
+            dispatch(authSuccess(idToken, response.data.localId))
+            dispatch(checkAuthTimeout(response.data.expiresIn))
          })
          .catch(err => {
             console.error(err)
@@ -83,5 +101,25 @@ export const auth = (email, password, isSignUp) => {
             //Dispatch Error
             dispatch(authFailed(finalMessage))
          })
+   }
+}
+
+export const authCheckState = () => {
+   return dispatch => {
+      const token = localStorage.getItem("token")
+      if (!token) {
+         dispatch(logout())
+      } else {
+         const expirationDate = new Date(localStorage.getItem("expirationDate"))
+
+         //Token has expired
+         if (expirationDate > new Date()) {
+            const userId = localStorage.getItem("userId")
+            dispatch(authSuccess(token, userId))
+            dispatch(checkAuthTimeout((expirationDate.getTime() - new Date().getTime())/1000))
+         } else {
+            dispatch(logout())
+         }
+      }
    }
 }
