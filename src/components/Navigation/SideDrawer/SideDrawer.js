@@ -1,9 +1,9 @@
-import React from "react";
-import LogoModule from "../../Logo/Logo.module.css";
-import Logo from "./../../Logo/Logo";
-import Backdrop from "./../../UI/Backdrop/Backdrop";
-import NavigationItems from "./../NavigationItems/NavigationItems";
-import "./SideDrawer.css";
+import React from "react"
+import LogoModule from "../../Logo/Logo.module.css"
+import Logo from "./../../Logo/Logo"
+import Backdrop from "./../../UI/Backdrop/Backdrop"
+import NavigationItems from "./../NavigationItems/NavigationItems"
+import "./SideDrawer.css"
 
 const sideDrawer = props => {
    let attachedClasses = ["SideDrawer", "Close"]
@@ -18,7 +18,7 @@ const sideDrawer = props => {
                <Logo />
             </div>
             <nav>
-               <NavigationItems />
+               <NavigationItems isAuthenticated={props.isAuth} />
             </nav>
          </div>
       </>

@@ -10,7 +10,7 @@ const toolbar = props => {
          <DrawerToggle clicked={props.showSideDrawer} />
          <Logo hack={true} />
          <nav className="desktopOnly">
-            <NavigationItems />
+            <NavigationItems isAuthenticated={props.isAuth}/>
          </nav>
          <p style={{ color: "white" }}>V4.0</p>
       </header>
