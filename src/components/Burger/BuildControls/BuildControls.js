@@ -11,7 +11,10 @@ const controls = [
 
 const BuildControls = props => (
    <div className={"BuildControls"}>
-      <p> Current Price: <strong>{props.totalPrice.toFixed(2)}</strong></p>
+      <p>
+         {" "}
+         Current Price: <strong>{props.totalPrice.toFixed(2)}</strong>
+      </p>
       {controls.map(cntrl => {
          return (
             <BuildControl
@@ -23,7 +26,14 @@ const BuildControls = props => (
             />
          )
       })}
-      <button className={"OrderButton"} disabled={!props.purchasable} onClick={props.purchaseHandler}>Order Now</button>
+
+      <button
+         className={"OrderButton"}
+         disabled={!props.purchasable}
+         onClick={props.purchaseHandler}
+      >
+         {props.isAuthenticated ? "Order Now" : "Sign Up To Order"}
+      </button>
    </div>
 )
 
