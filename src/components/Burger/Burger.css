@@ -24,6 +24,11 @@
       width: 350px;
       height: 300px;
     }
+
+    .Burger2 {
+      width: 180px;
+      height: 180px;
+    }
   }
 
 @media (min-width: 500px) and (min-height: 401px) {
@@ -35,6 +40,11 @@
 
 @media (min-width: 1000px) and (min-height: 700px) {
   .Burger {
+    width: 700px;
+    height: 600px;
+  }
+
+  .Burger2 {
     width: 700px;
     height: 600px;
   }

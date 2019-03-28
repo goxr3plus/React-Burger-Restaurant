@@ -26,18 +26,19 @@ class App extends Component {
       if (this.props.isAuthenticated) {
          routes = (
             <Switch>
-               {this.props.isAuthenticated ? <Route path="/orders" component={Orders} /> : null}
-               <Route path="/logout" component={Logout} />
                <Route path="/checkout" component={Checkout} />
+               <Route path="/orders" component={Orders} />
+               <Route path="/logout" component={Logout} />
+               <Route path="/auth" component={Auth} />
                <Route path="/" exact component={BurgerBuilder} />
-
-               {/* <Route
+               <Route
                   render={() => (
                      <h1 style={{ textAlign: "center" }}>
                         <strong>404 PAGE NOT FOUND </strong>
                      </h1>
                   )}
-               /> */}
+               />
+               <Redirect from="/" to="/React-Burger-Restaurant" />
 
                {/* <Redirect from="/" to="/React-Burger-Restaurant" /> */}
             </Switch>
