@@ -3,7 +3,6 @@ import Button from "./../../UI/Button/Button"
 
 class OrderSummary extends Component {
    componentDidUpdate(prevProps, prevState) {
-      // console.log("[OrderSummary.js] componentDidUpdate")
    }
 
    render() {

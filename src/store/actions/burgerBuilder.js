@@ -45,7 +45,6 @@ export const initIngredients = () => {
             dispatch(loading(false))
          })
          .catch(error => {
-            // console.log("err")
             dispatch(fetchIngredientsFailed())
             dispatch(loading(false))
          })

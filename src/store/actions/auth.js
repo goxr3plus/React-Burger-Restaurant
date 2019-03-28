@@ -58,11 +58,9 @@ export const auth = (email, password, isSignUp) => {
          password: password,
          returnSecureToken: true,
       }
-      console.log(url)
       axios
          .post(url, authData)
          .then(response => {
-            console.log(response)
 
             //Variables
             const idToken = response.data.idToken
@@ -96,7 +94,6 @@ export const auth = (email, password, isSignUp) => {
             //Determine the final message
             let finalMessage =
                map.get(errorMessage) !== undefined ? map.get(errorMessage) : errorMessage
-            console.log(map.get(errorMessage))
 
             //Dispatch Error
             dispatch(authFailed(finalMessage))

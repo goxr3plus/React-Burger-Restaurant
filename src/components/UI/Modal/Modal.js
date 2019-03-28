@@ -8,7 +8,6 @@ class Modal extends Component {
    }
 
    componentWillUpdate(nextProp, nextState) {
-      // console.log("model will update")
    }
 
    render() {
