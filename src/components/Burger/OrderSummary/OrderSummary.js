@@ -2,14 +2,14 @@ import React, { Component } from "react"
 import Button from "./../../UI/Button/Button"
 
 class OrderSummary extends Component {
-   componentDidUpdate(prevProps, prevState) {
-   }
+   componentDidUpdate(prevProps, prevState) {}
 
    render() {
       const ingredientSummary = Object.keys(this.props.ingredients).map(ingredient => {
          return (
             <li key={ingredient}>
-               <span style={{ textTransform: "capitalize" }}>{ingredient}</span>: {this.props.ingredients[ingredient]}
+               <span style={{ textTransform: "capitalize" }}>{ingredient}</span>:{" "}
+               {this.props.ingredients[ingredient]}
             </li>
          )
       })
