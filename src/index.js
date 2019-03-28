@@ -1,15 +1,15 @@
 import React from "react"
 import ReactDOM from "react-dom"
+import { Provider } from "react-redux"
 import { BrowserRouter } from "react-router-dom"
+import { applyMiddleware, combineReducers, compose, createStore } from "redux"
+import thunk from "redux-thunk"
 import App from "./App"
 import "./index.css"
 import * as serviceWorker from "./serviceWorker"
-import { createStore, applyMiddleware, compose, combineReducers } from "redux"
+import authReducer from "./store/reducers/auth"
 import burgerBuilderReducer from "./store/reducers/burgerBuilder"
 import orderReducer from "./store/reducers/order"
-import thunk from "redux-thunk"
-import authReducer from "./store/reducers/auth"
-import { Provider } from "react-redux"
 
 const rootReducer = combineReducers({
    burgerBuilder: burgerBuilderReducer,
