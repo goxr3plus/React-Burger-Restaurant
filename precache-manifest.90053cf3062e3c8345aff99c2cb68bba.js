@@ -1,11 +1,11 @@
 self.__precacheManifest = [
   {
-    "revision": "cc6444ad05914a06f501",
+    "revision": "7def2db5b24a113e54f7",
     "url": "/React-Burger-Restaurant/static/css/main.4dbca505.chunk.css"
   },
   {
-    "revision": "cc6444ad05914a06f501",
-    "url": "/React-Burger-Restaurant/static/js/main.8d44d690.chunk.js"
+    "revision": "7def2db5b24a113e54f7",
+    "url": "/React-Burger-Restaurant/static/js/main.101466ce.chunk.js"
   },
   {
     "revision": "6fdc2c030ac58fbae2be",
@@ -20,7 +20,7 @@ self.__precacheManifest = [
     "url": "/React-Burger-Restaurant/static/media/burger-logo.b8503d26.png"
   },
   {
-    "revision": "0512b98ed524283e8c171eca79d028d4",
+    "revision": "d611af4de7db6ee130b7deb3203d8b98",
     "url": "/React-Burger-Restaurant/index.html"
   }
 ];
